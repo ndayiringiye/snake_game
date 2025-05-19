@@ -209,127 +209,122 @@ export default function SnakeGame() {
   };
   
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white px-4">
-      <div className="flex flex-col items-center mb-6">
-        <div className="flex items-center">
-          <div className="mr-2 text-green-400">🐍</div>
-          <h1 className="text-3xl font-bold">Snake Game</h1>
-        </div>
-        <p className="text-gray-400 mt-1">Use arrow keys or buttons to control the snake</p>
-      </div>
-      
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-        <div className="relative bg-gray-800 rounded-lg shadow-2xl overflow-hidden border-2 border-gray-700">
-          <div 
-            style={{
-              width: GRID_SIZE * CELL_SIZE,
-              height: GRID_SIZE * CELL_SIZE,
-              position: 'relative'
-            }}
-          >
-            {renderBoard()}
-            {gameOver && (
-              <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center">
-                <h2 className="text-xl font-bold text-red-500 mb-2">Game Over</h2>
-                <p className="text-gray-300 mb-4">Your Score: {score}</p>
-                <button 
-                  onClick={resetGame}
-                  className="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-md flex items-center"
-                >
-                  <RefreshCcw size={16} className="mr-2" />
-                  Play Again
-                </button>
-              </div>
-            )}
-            {isPaused && !gameOver && (
-              <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
-                <h2 className="text-xl font-bold text-yellow-500">PAUSED</h2>
-              </div>
-            )}
+   <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white px-4 py-6 sm:px-6 lg:px-8">
+  <div className="flex flex-col items-center mb-6 text-center">
+    <div className="flex items-center justify-center">
+      <div className="mr-2 text-green-400">🐍</div>
+      <h1 className="text-3xl font-bold">Snake Game</h1>
+    </div>
+    <p className="text-gray-400 mt-1 text-sm sm:text-base">Use arrow keys or buttons to control the snake</p>
+  </div>
+
+  <div className="flex flex-col md:flex-row items-center md:items-start gap-8 w-full max-w-5xl">
+    <div className="relative bg-gray-800 rounded-lg shadow-2xl overflow-hidden border-2 border-gray-700">
+      <div 
+        style={{
+          width: GRID_SIZE * CELL_SIZE,
+          height: GRID_SIZE * CELL_SIZE,
+          position: 'relative'
+        }}
+      >
+        {renderBoard()}
+        {gameOver && (
+          <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center text-center">
+            <h2 className="text-xl font-bold text-red-500 mb-2">Game Over</h2>
+            <p className="text-gray-300 mb-4">Your Score: {score}</p>
+            <button 
+              onClick={resetGame}
+              className="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-md flex items-center"
+            >
+              <RefreshCcw size={16} className="mr-2" />
+              Play Again
+            </button>
           </div>
-        </div>
-        <div className="flex flex-col items-center md:items-start">
-          <div className="bg-gray-800 rounded-lg p-4 mb-6 w-full">
-            <h2 className="text-lg font-semibold mb-2 text-center">Score</h2>
-            <div className="flex justify-around">
-              <div className="text-center">
-                <p className="text-gray-400 text-sm">Current</p>
-                <p className="text-2xl font-bold text-green-400">{score}</p>
-              </div>
-              <div className="text-center">
-                <p className="text-gray-400 text-sm">High Score</p>
-                <p className="text-2xl font-bold text-yellow-400">{highScore}</p>
-              </div>
-            </div>
+        )}
+        {isPaused && !gameOver && (
+          <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
+            <h2 className="text-xl font-bold text-yellow-500">PAUSED</h2>
           </div>
-          
-          <div className="bg-gray-800 rounded-lg p-4 w-full">
-            <h2 className="text-lg font-semibold mb-2 text-center">Controls</h2>
-            
-            <div className="grid grid-cols-3 gap-2 mx-auto w-40 mb-4">
-              <div></div>
-              <button 
-                onClick={() => handleDirectionButton(DIRECTIONS.UP)}
-                className="bg-gray-700 hover:bg-gray-600 flex items-center justify-center p-3 rounded-md"
-              >
-                <ArrowUp size={20} />
-              </button>
-              <div></div>
-              
-              <button 
-                onClick={() => handleDirectionButton(DIRECTIONS.LEFT)}
-                className="bg-gray-700 hover:bg-gray-600 flex items-center justify-center p-3 rounded-md"
-              >
-                <ArrowLeft size={20} />
-              </button>
-              <div></div>
-              <button 
-                onClick={() => handleDirectionButton(DIRECTIONS.RIGHT)}
-                className="bg-gray-700 hover:bg-gray-600 flex items-center justify-center p-3 rounded-md"
-              >
-                <ArrowRight size={20} />
-              </button>
-              
-              <div></div>
-              <button 
-                onClick={() => handleDirectionButton(DIRECTIONS.DOWN)}
-                className="bg-gray-700 hover:bg-gray-600 flex items-center justify-center p-3 rounded-md"
-              >
-                <ArrowDown size={20} />
-              </button>
-              <div></div>
-            </div>
-            
-            <div className="flex justify-center gap-2">
-              <button 
-                onClick={togglePause}
-                className="bg-gray-700 hover:bg-gray-600 flex items-center justify-center px-4 py-2 rounded-md"
-              >
-                {isPaused ? <Play size={16} className="mr-1" /> : <Pause size={16} className="mr-1" />}
-                {isPaused ? 'Resume' : 'Pause'}
-              </button>
-              
-              <button 
-                onClick={resetGame}
-                className="bg-gray-700 hover:bg-gray-600 flex items-center justify-center px-4 py-2 rounded-md"
-              >
-                <RotateCcw size={16} className="mr-1" />
-                Reset
-              </button>
-            </div>
-          </div>
-          <div className="bg-gray-800 rounded-lg p-4 mt-6 w-full">
-            <h2 className="text-lg font-semibold mb-2 text-center">Instructions</h2>
-            <ul className="text-sm text-gray-300 space-y-1">
-              <li>• Use arrow keys or buttons to move</li>
-              <li>• Collect red food to grow and earn points</li>
-              <li>• Avoid hitting walls or yourself</li>
-              <li>• Press Space to pause/resume</li>
-              <li>• Press R to restart the game</li>
-            </ul>
-          </div>
-        </div>
+        )}
       </div>
     </div>
+    <div className="flex flex-col items-center md:items-start w-full md:max-w-sm space-y-6">
+      <div className="bg-gray-800 rounded-lg p-4 w-full text-center">
+        <h2 className="text-lg font-semibold mb-2">Score</h2>
+        <div className="flex justify-around">
+          <div className="text-center">
+            <p className="text-gray-400 text-sm">Current</p>
+            <p className="text-2xl font-bold text-green-400">{score}</p>
+          </div>
+          <div className="text-center">
+            <p className="text-gray-400 text-sm">High Score</p>
+            <p className="text-2xl font-bold text-yellow-400">{highScore}</p>
+          </div>
+        </div>
+      </div>
+      <div className="bg-gray-800 rounded-lg p-4 w-full">
+        <h2 className="text-lg font-semibold mb-2 text-center">Controls</h2>
+        <div className="grid grid-cols-3 gap-2 w-full max-w-xs mx-auto mb-4">
+          <div></div>
+          <button 
+            onClick={() => handleDirectionButton(DIRECTIONS.UP)}
+            className="bg-gray-700 hover:bg-gray-600 flex items-center justify-center p-3 rounded-md"
+          >
+            <ArrowUp size={20} />
+          </button>
+          <div></div>
+          <button 
+            onClick={() => handleDirectionButton(DIRECTIONS.LEFT)}
+            className="bg-gray-700 hover:bg-gray-600 flex items-center justify-center p-3 rounded-md"
+          >
+            <ArrowLeft size={20} />
+          </button>
+          <div></div>
+          <button 
+            onClick={() => handleDirectionButton(DIRECTIONS.RIGHT)}
+            className="bg-gray-700 hover:bg-gray-600 flex items-center justify-center p-3 rounded-md"
+          >
+            <ArrowRight size={20} />
+          </button>
+          <div></div>
+          <button 
+            onClick={() => handleDirectionButton(DIRECTIONS.DOWN)}
+            className="bg-gray-700 hover:bg-gray-600 flex items-center justify-center p-3 rounded-md"
+          >
+            <ArrowDown size={20} />
+          </button>
+          <div></div>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-3">
+          <button 
+            onClick={togglePause}
+            className="bg-gray-700 hover:bg-gray-600 flex items-center justify-center px-4 py-2 rounded-md"
+          >
+            {isPaused ? <Play size={16} className="mr-1" /> : <Pause size={16} className="mr-1" />}
+            {isPaused ? 'Resume' : 'Pause'}
+          </button>
+          <button 
+            onClick={resetGame}
+            className="bg-gray-700 hover:bg-gray-600 flex items-center justify-center px-4 py-2 rounded-md"
+          >
+            <RotateCcw size={16} className="mr-1" />
+            Reset
+          </button>
+        </div>
+      </div>
+      <div className="bg-gray-800 rounded-lg p-4 w-full">
+        <h2 className="text-lg font-semibold mb-2 text-center">Instructions</h2>
+        <ul className="text-sm text-gray-300 space-y-1">
+          <li>• Use arrow keys or buttons to move</li>
+          <li>• Collect red food to grow and earn points</li>
+          <li>• Avoid hitting walls or yourself</li>
+          <li>• Press Space to pause/resume</li>
+          <li>• Press R to restart the game</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
   );
 }
